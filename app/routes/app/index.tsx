@@ -18,9 +18,7 @@ export default function AppIndex() {
       <ul>
         {links.map((link) => (
           <li key={link.slug}>
-            <Link to={link.slug} className="text-blue-600 underline">
-              {link.url}
-            </Link>
+            <Link to={`links/${link.id}`}>{link.url}</Link>
           </li>
         ))}
       </ul>

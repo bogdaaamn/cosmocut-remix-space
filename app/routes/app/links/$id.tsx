@@ -6,7 +6,12 @@ import type { LoaderArgs } from "@remix-run/node";
 import { getLinkData } from "~/models/link.server";
 
 export const loader = async ({ params }: LoaderArgs) => {
-  const linkData = await getLinkData(params.slug ?? "");
+  if (!params.id) {
+    throw new Error("Missing link ID");
+  }
+
+  const linkData = await getLinkData(params.id);
+
   return json({ link: linkData });
 };
 
@@ -15,8 +20,9 @@ export default function PostSlug() {
 
   return (
     <main>
-      <h1>Link: {link.slug}</h1>
+      <h1>Link: {link.id}</h1>
       <p>Slug: {link.slug}</p>
+      <p>Created at: {link.createdAt}</p>
       <p>URL: {link.url}</p>
     </main>
   );
