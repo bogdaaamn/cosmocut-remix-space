@@ -37,7 +37,7 @@ export default function AppIndex() {
                         </p>
                       </div>
                     </div>
-                    <div className="mt-2 flex ">
+                    <div className="mt-2 flex justify-between">
                       <p
                         title={link.url}
                         className="truncate text-sm text-gray-500"
@@ -54,6 +54,7 @@ export default function AppIndex() {
             ))}
           </ul>
         </div>
+
         <div className="overflow-scroll col-span-2 bg-dots shadow rounded-xl flex items-center justify-center">
           <Outlet />
         </div>
