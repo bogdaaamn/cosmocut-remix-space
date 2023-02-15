@@ -1,32 +1,29 @@
-export default function Index() {
+import { json } from "@remix-run/node";
+import { Link, useLoaderData } from "@remix-run/react";
+
+import { getLinks } from "~/models/link.server";
+
+export const loader = async () => {
+  return json({
+    links: await getLinks(),
+  });
+};
+
+export default function AppIndex() {
+  const { links } = useLoaderData<typeof loader>();
+
   return (
-    <div>
-      <h1>Welcome to Remix</h1>
+    <main>
+      <h1>Short links</h1>
       <ul>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/blog"
-            rel="noreferrer"
-          >
-            15m Quickstart Blog Tutorial
-          </a>
-        </li>
-        <li>
-          <a
-            target="_blank"
-            href="https://remix.run/tutorials/jokes"
-            rel="noreferrer"
-          >
-            Deep Dive Jokes App Tutorial
-          </a>
-        </li>
-        <li>
-          <a target="_blank" href="https://remix.run/docs" rel="noreferrer">
-            Remix Docs
-          </a>
-        </li>
+        {links.map((link) => (
+          <li key={link.slug}>
+            <Link to={link.slug} className="text-blue-600 underline">
+              {link.url}
+            </Link>
+          </li>
+        ))}
       </ul>
-    </div>
+    </main>
   );
 }
