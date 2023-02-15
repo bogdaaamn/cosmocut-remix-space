@@ -8,6 +8,6 @@ micros:
         - npm run build
       include:
         - build
-        - public/build
+        - public
         - server.js
       run: "node server.js"
