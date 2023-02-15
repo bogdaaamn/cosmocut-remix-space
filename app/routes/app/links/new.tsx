@@ -11,12 +11,12 @@ export const action = async ({ request }: ActionArgs) => {
   const url = formData.get("url") as string;
   const slug = formData.get("slug") as string;
 
-  await createLink(url, slug);
+  const data = await createLink(url, slug);
 
-  return redirect("/app");
+  return redirect(`/app/links/${data.id}`);
 };
 
-export default function NewLink() {
+export default function LinkNew() {
   return (
     <Form method="post">
       <p>

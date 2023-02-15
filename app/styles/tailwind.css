@@ -1,3 +1,11 @@
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
+
+@layer components {
+  .bg-dots {
+    background: linear-gradient(90deg, #ffffff 15px, transparent 1%) 50%,
+      linear-gradient(#ffffff 15px, transparent 1%) 50%, rgba(0, 0, 0, 0.24);
+    background-size: 16px 16px;
+  }
+}

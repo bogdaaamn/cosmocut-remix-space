@@ -15,7 +15,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   return json({ link: linkData });
 };
 
-export default function PostSlug() {
+export default function LinkSlug() {
   const { link } = useLoaderData<typeof loader>();
 
   return (
