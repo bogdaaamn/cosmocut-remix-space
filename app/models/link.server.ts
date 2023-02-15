@@ -34,3 +34,23 @@ export async function getLinkData(id: string): Promise<Link> {
     createdAt: data.created_at as string,
   };
 }
+
+export async function createLink(url: string, slug: string): Promise<Link> {
+  const db = await getDetabase();
+  const data = await db.put({
+    url,
+    slug,
+    created_at: new Date().toISOString(),
+  });
+
+  if (!data) {
+    throw new Error("Link not created");
+  }
+
+  return {
+    id: data.key as string,
+    slug: data.slug as string,
+    url: data.url as string,
+    createdAt: data.created_at as string,
+  };
+}
