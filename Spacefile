@@ -1,0 +1,13 @@
+# Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
+v: 0
+micros:
+    - name: remix-in-space
+      src: .
+      engine: nodejs16
+      commands:
+        - npm run build
+      include:
+        - build
+        - public/build
+        - server.js
+      run: "node server.js"
