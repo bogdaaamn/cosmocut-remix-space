@@ -9,7 +9,6 @@ import {
   ClipboardIcon,
   ChartPieIcon,
   ChartBarSquareIcon,
-  PlusCircleIcon,
 } from "@heroicons/react/24/outline";
 
 export const loader = async ({ params }: LoaderArgs) => {
@@ -32,7 +31,7 @@ export default function LinkSlug() {
   return (
     <main className="flex flex-col gap-8 w-full h-full px-16 py-8 bg-white">
       <Form method="post" key={link.slug}>
-        <div className="mt-8 grid grid-cols-2 gap-4">
+        <div className="mt-6 grid grid-cols-2 gap-4">
           <div>
             <label
               htmlFor="url"
