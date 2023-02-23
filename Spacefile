@@ -11,3 +11,5 @@ micros:
         - public
         - server.js
       run: "node server.js"
+      public_routes:
+        - "/(?!(app))*"
