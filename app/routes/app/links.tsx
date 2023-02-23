@@ -28,7 +28,7 @@ export default function AppIndex() {
           </ul>
         </div>
 
-        <div className="overflow-scroll col-span-2 bg-dots shadow rounded-xl flex items-center justify-center">
+        <div className="overflow-scroll col-span-2 bg-dots shadow rounded-xl">
           <Outlet />
         </div>
       </main>
