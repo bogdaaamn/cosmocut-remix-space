@@ -1,5 +1,3 @@
-// Children props are passed in from the parent component
-
 import { Link } from "@remix-run/react";
 
 export function Layout({ children }: { children: React.ReactNode }) {
