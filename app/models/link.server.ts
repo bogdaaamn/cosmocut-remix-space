@@ -8,7 +8,7 @@ export type Link = {
 };
 
 export async function getLinks(): Promise<Array<Link>> {
-  const db = await getDetabase();
+  const db = await getDetabase("links");
   const data = await db.fetch();
 
   return data.items.map((item) => ({
@@ -20,7 +20,7 @@ export async function getLinks(): Promise<Array<Link>> {
 }
 
 export async function getLinkData(id: string): Promise<Link> {
-  const db = await getDetabase();
+  const db = await getDetabase("links");
   const data = await db.get(id);
 
   if (!data) {
@@ -36,7 +36,7 @@ export async function getLinkData(id: string): Promise<Link> {
 }
 
 export async function createLink(url: string, slug: string): Promise<Link> {
-  const db = await getDetabase();
+  const db = await getDetabase("links");
   const data = await db.put({
     url,
     slug,
