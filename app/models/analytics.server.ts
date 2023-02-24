@@ -2,6 +2,16 @@ import { getClientIPAddress } from "remix-utils";
 
 import { getDetabase } from "./deta.server";
 
+export type Analytics = {
+  id: string;
+  url: string;
+  createdAt: string;
+  country: string;
+  referrer: string;
+  device: string;
+  browser: string;
+};
+
 async function getCountry(ip: string | null) {
   const res = await fetch(`https://ipapi.co/${ip}/country_name/`);
   const data = await res.text();
@@ -75,4 +85,26 @@ export async function createAnalytics(url: string, headers: Headers) {
     device,
     browser,
   });
+}
+
+export async function getAnalytics(id: string): Promise<Analytics[]> {
+  const db = await getDetabase("analytics");
+  const data = await db.fetch({ url: id });
+
+  return data.items.map((item) => ({
+    id: item.key as string,
+    url: item.url as string,
+    createdAt: item.created_at as string,
+    country: item.country as string,
+    referrer: item.referrer as string,
+    device: item.device as string,
+    browser: item.browser as string,
+  }));
+}
+
+export async function getAnalyticClicks(id: string): Promise<number> {
+  const db = await getDetabase("analytics");
+  const data = await db.fetch({ url: id });
+
+  return data.count;
 }
