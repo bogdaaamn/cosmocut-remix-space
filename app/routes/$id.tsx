@@ -4,14 +4,17 @@ import { Link } from "@remix-run/react";
 import type { LoaderArgs } from "@remix-run/node";
 
 import { getLinkData } from "~/models/link.server";
+import { createAnalytics } from "~/models/analytics.server";
 
-export const loader = async ({ params }: LoaderArgs) => {
+export const loader = async ({ params, request }: LoaderArgs) => {
   if (!params.id) {
     throw new Error("Missing link ID");
   }
 
   try {
     const data = await getLinkData(params.id);
+    await createAnalytics(params.id, request.headers);
+
     return redirect(data.url);
   } catch (e) {
     return json({ id: params.id });
