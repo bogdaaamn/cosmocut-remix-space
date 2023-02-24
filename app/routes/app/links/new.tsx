@@ -4,6 +4,7 @@ import { Form } from "@remix-run/react";
 import type { ActionArgs } from "@remix-run/node";
 
 import { createLink } from "~/models/link.server";
+import ShortUniqueId from "short-unique-id";
 
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
@@ -17,6 +18,11 @@ export const action = async ({ request }: ActionArgs) => {
 };
 
 export default function LinkNew() {
+  function generateRandomSlug() {
+    const slug = new ShortUniqueId().randomUUID(6);
+    return slug;
+  }
+
   return (
     <main className="flex flex-col w-full h-full px-16 py-8 bg-white">
       <Form method="post">
@@ -54,7 +60,8 @@ export default function LinkNew() {
                 name="slug"
                 id="slug"
                 className="block w-full rounded-md border-gray-300 pl-14 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="dn4jem1"
+                placeholder="dn4jem"
+                defaultValue={generateRandomSlug()}
               />
             </div>
           </div>

@@ -16,7 +16,7 @@ export function LinkCard({ data: link }: PropsType) {
       <div className="px-4 py-4 sm:px-6">
         <div className="flex items-center justify-between">
           <p className="truncate text-sm font-medium text-indigo-600">
-            de.ta/{link.slug}
+            de.ta/{link.id}
           </p>
           <div className="ml-2 flex flex-shrink-0">
             <p className="inline-flex rounded-full bg-green-100 px-2 text-xs font-semibold leading-5 text-green-800">

@@ -30,7 +30,7 @@ export default function LinkSlug() {
 
   return (
     <main className="flex flex-col gap-8 w-full h-full px-16 py-8 bg-white">
-      <Form method="post" key={link.slug}>
+      <Form method="post" key={link.id}>
         <div className="mt-6 grid grid-cols-2 gap-4">
           <div>
             <label
@@ -81,14 +81,14 @@ export default function LinkSlug() {
                 id="slug"
                 className="block pl-14 w-full rounded-md truncate pr-9 border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500 disabled:cursor-not-allowed disabled:border-gray-200 disabled:bg-gray-50 disabled:text-gray-500"
                 disabled
-                defaultValue={link.slug}
-                title={link.slug}
+                defaultValue={link.id}
+                title={link.id}
               />
               <div className="absolute inset-y-0 right-0 flex items-center">
                 <button
                   type="button"
                   className="relative m-2 p-2 rounded-md font-medium hover:bg-gray-100 focus:border-indigo-500 focus:outline-none focus:ring-1 focus:ring-indigo-500"
-                  onClick={() => copyToClipboard(link.slug)}
+                  onClick={() => copyToClipboard(link.id)}
                   title="Copy to clipboard"
                 >
                   <ClipboardIcon
