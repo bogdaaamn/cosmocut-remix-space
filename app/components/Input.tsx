@@ -1,19 +1,24 @@
-import { ClipboardIcon, ArrowUpRightIcon } from "@heroicons/react/24/outline";
+import {
+  ClipboardIcon,
+  ArrowUpRightIcon,
+  ExclamationCircleIcon,
+} from "@heroicons/react/24/outline";
 
 type InputProps = {
   id: string;
   title: string;
   placeholder: string;
   value?: string;
+  error?: string | null;
 };
 
-export function Input({ id, title, placeholder }: InputProps) {
+export function Input({ id, title, placeholder, error }: InputProps) {
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {title}
       </label>
-      <div className="mt-1">
+      <div className="relative mt-1 rounded-md shadow-sm">
         <input
           type="text"
           name={id}
@@ -21,18 +26,37 @@ export function Input({ id, title, placeholder }: InputProps) {
           className="block w-full rounded-md border-gray-300 shadow-sm focus:border-primary focus:ring-primary"
           placeholder={placeholder}
         />
+        {error ? (
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <ExclamationCircleIcon
+              className="h-5 w-5 text-red-500"
+              aria-hidden="true"
+            />
+          </div>
+        ) : null}
       </div>
+      {error ? (
+        <p className="mt-1 text-sm text-red-600" id="email-error">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }
 
-export function AddonInput({ id, title, placeholder, value }: InputProps) {
+export function AddonInput({
+  id,
+  title,
+  placeholder,
+  value,
+  error,
+}: InputProps) {
   return (
     <div>
       <label htmlFor={id} className="block text-sm font-medium text-gray-700">
         {title}
       </label>
-      <div className="mt-1 flex rounded-md shadow-sm border border-gray-300  focus-within:border-primary focus-within:ring-primary focus-within:ring-1">
+      <div className="mt-1 relative flex rounded-md shadow-sm border border-gray-300  focus-within:border-primary focus-within:ring-primary focus-within:ring-1">
         <span className="inline-flex items-center pl-3 pr-0 text-gray-500">
           cos.cx/
         </span>
@@ -42,9 +66,22 @@ export function AddonInput({ id, title, placeholder, value }: InputProps) {
           id={id}
           className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 pr-3 pl-0 py-2  focus:ring-0"
           placeholder={placeholder}
-          value={value}
+          defaultValue={value}
         />
+        {error ? (
+          <div className="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-3">
+            <ExclamationCircleIcon
+              className="h-5 w-5 text-red-500"
+              aria-hidden="true"
+            />
+          </div>
+        ) : null}
       </div>
+      {error ? (
+        <p className="mt-1 text-sm text-red-600" id="email-error">
+          {error}
+        </p>
+      ) : null}
     </div>
   );
 }
