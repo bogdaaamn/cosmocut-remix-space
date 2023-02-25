@@ -1,5 +1,3 @@
-import { getClientIPAddress } from "remix-utils";
-
 import { getDetabase } from "./deta.server";
 
 export type Analytics = {
@@ -12,23 +10,35 @@ export type Analytics = {
   browser: string;
 };
 
-async function getCountry(ip: string | null) {
-  const res = await fetch(`https://ipapi.co/${ip}/country_name/`);
-  const data = await res.text();
+function getCountryFromHeaders(headers: Headers): string {
+  // Get locale and language from headers
+  const languageHeader = headers.get("Accept-Language");
 
-  if (data == "Undefined") return "Space";
+  // Return country code from locale: en-US => US
+  if (languageHeader) {
+    const userLocale = languageHeader.split(",")[0];
+    return userLocale.split("-")[1];
+  }
 
-  return data;
+  return "Space";
 }
 
-async function getReferrer(referrer: string) {
-  // Get domain of referrer url or return direct
-  const domain = referrer.match(/:\/\/(.[^/]+)/);
-  return domain ? domain[1] : "direct";
+function getReferrer(headers: Headers): string {
+  // Get referrer from headers
+  const referrer = headers.get("Referer");
+
+  // Extract the domain from the referrer URL
+  if (referrer) {
+    const domain = referrer.match(/:\/\/(.[^/]+)/);
+    return domain ? domain[1] : "direct";
+  } else {
+    return "direct";
+  }
 }
 
-async function getUserAgent(userAgent: string) {
-  // Get device type from user agent
+function getDevice(headers: Headers): string {
+  const userAgent = headers.get("User-Agent");
+
   const devices = [
     {
       name: "mobile",
@@ -41,11 +51,21 @@ async function getUserAgent(userAgent: string) {
     },
     { name: "desktop", regex: /Windows NT|Macintosh|X11|Linux|CrOS/ },
   ];
-  const device = devices.find((device) => device.regex.test(userAgent)) || {
-    name: "unknown",
-  };
 
-  // Get browser type from user agent
+  if (userAgent) {
+    const device = devices.find((device) => device.regex.test(userAgent)) || {
+      name: "unknown",
+    };
+
+    return device.name;
+  }
+
+  return "unknown";
+}
+
+function getBrowser(headers: Headers): string {
+  const userAgent = headers.get("User-Agent") || "";
+
   const browsers = [
     { name: "chrome", regex: /Chrome|CriOS/ },
     { name: "firefox", regex: /Firefox/ },
@@ -54,34 +74,35 @@ async function getUserAgent(userAgent: string) {
     { name: "edge", regex: /Edge/ },
     { name: "ie", regex: /MSIE|Trident/ },
   ];
-  const browser = browsers.find((browser) => browser.regex.test(userAgent)) || {
-    name: "unknown",
-  };
 
-  return { device: device.name, browser: browser.name };
+  if (userAgent) {
+    const browser = browsers.find((browser) =>
+      browser.regex.test(userAgent)
+    ) || {
+      name: "unknown",
+    };
+
+    return browser.name;
+  }
+
+  return "unknown";
 }
 
 // TODO: Please add better types to all these functions
 export async function createAnalytics(url: string, headers: Headers) {
-  // Get country from ip address
-  const ipAddress = getClientIPAddress(headers);
-  const country = await getCountry(ipAddress);
+  const country = getCountryFromHeaders(headers);
+  const referrer = getReferrer(headers);
+  const device = getDevice(headers);
+  const browser = getBrowser(headers);
 
-  // Get referrer from headers, get domain
-  const referrer = headers.get("Referer") || "direct";
-  const referrerDomain = await getReferrer(referrer);
+  console.log("country", country);
 
-  // Get user agent from headers, get device and browser
-  const userAgent = headers.get("User-Agent") || "unknown";
-  const { device, browser } = await getUserAgent(userAgent);
-
-  // Save analytics data to detabase
   const db = await getDetabase("analytics");
   await db.put({
     url,
     created_at: new Date().toISOString(),
     country,
-    referrer: referrerDomain,
+    referrer,
     device,
     browser,
   });

@@ -30,8 +30,8 @@ export default function RedirectSlug() {
         </p>
         <p className="mt-1 text-xl text-gray-500">
           Go back to{" "}
-          <Link to="https://deta.space" className="font-medium">
-            de.ta
+          <Link to="/app/links" className="font-medium">
+            cos.cx
           </Link>
           .
         </p>
