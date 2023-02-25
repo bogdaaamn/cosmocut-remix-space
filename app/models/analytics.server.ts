@@ -95,8 +95,6 @@ export async function createAnalytics(url: string, headers: Headers) {
   const device = getDevice(headers);
   const browser = getBrowser(headers);
 
-  console.log("country", country);
-
   const db = await getDetabase("analytics");
   await db.put({
     url,

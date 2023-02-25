@@ -1,11 +1,12 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, useActionData } from "@remix-run/react";
+import { Form, Link, useActionData } from "@remix-run/react";
 
 import type { ActionArgs } from "@remix-run/node";
 
 import { createLink } from "~/models/link.server";
 import ShortUniqueId from "short-unique-id";
 import { AddonInput, Input } from "~/components/Input";
+import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
 
 // Regex to allow https://*.* and https://*.*/*
 export const urlRegex = /^(https:\/\/)(.*)\.[0-9a-zA-Z]+(\/)?(.*)$/;
@@ -48,9 +49,20 @@ export default function LinkNew() {
   }
 
   return (
-    <main className="flex flex-col w-full h-full px-16 py-8 bg-white">
-      <Form method="post">
-        <div className="mt-6 grid grid-cols-2 gap-y-6 gap-x-4">
+    <main className="flex flex-col gap-8 w-full h-full px-16 py-8 bg-white">
+      <div className="flex gap-2 justify-end">
+        <button
+          type="submit"
+          form="new-link-form"
+          className="inline-flex items-center rounded-md border border-gray-300 bg-white px-3 py-2 text-sm font-medium leading-4 text-gray-700 shadow-sm hover:bg-gray-50 focus:outline-none focus:ring-2 focus:ring-primary focus:ring-offset-2"
+        >
+          <PlusIcon className="-ml-0.5 mr-1 h-4 w-4" aria-hidden="true" />
+          Create and view
+        </button>
+      </div>
+
+      <Form method="post" id="new-link-form">
+        <div className="grid grid-cols-2 gap-y-6 gap-x-4">
           <Input
             id="url"
             title="Destination URL"
@@ -64,15 +76,6 @@ export default function LinkNew() {
             value={generateRandomSlug()}
             error={errors?.slug}
           />
-        </div>
-
-        <div className="pt-5">
-          <button
-            type="submit"
-            className="rounded-md border border-transparent bg-indigo-600 py-2 px-4 text-sm font-medium text-white shadow-sm hover:bg-indigo-700 focus:outline-none focus:ring-2 focus:ring-indigo-500 focus:ring-offset-2"
-          >
-            Create short link
-          </button>
         </div>
       </Form>
     </main>
