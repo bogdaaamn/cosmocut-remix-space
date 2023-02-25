@@ -1,12 +1,12 @@
 import { json, redirect } from "@remix-run/node";
-import { Form, Link, useActionData } from "@remix-run/react";
+import { Form, useActionData } from "@remix-run/react";
 
 import type { ActionArgs } from "@remix-run/node";
 
 import { createLink } from "~/models/link.server";
 import ShortUniqueId from "short-unique-id";
 import { AddonInput, Input } from "~/components/Input";
-import { PlusIcon, XMarkIcon } from "@heroicons/react/24/outline";
+import { PlusIcon } from "@heroicons/react/24/outline";
 
 // Regex to allow https://*.* and https://*.*/*
 export const urlRegex = /^(https:\/\/)(.*)\.[0-9a-zA-Z]+(\/)?(.*)$/;
