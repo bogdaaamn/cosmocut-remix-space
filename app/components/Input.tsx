@@ -38,8 +38,8 @@ export function AddonInput({ id, title, placeholder, value }: InputProps) {
         </span>
         <input
           type="text"
-          name="company-website"
-          id="company-website"
+          name={id}
+          id={id}
           className="block w-full min-w-0 flex-1 rounded-none rounded-r-md border-0 pr-3 pl-0 py-2  focus:ring-0"
           placeholder={placeholder}
           value={value}

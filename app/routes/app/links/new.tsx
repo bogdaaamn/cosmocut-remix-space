@@ -33,46 +33,12 @@ export default function LinkNew() {
             title="Destination URL"
             placeholder="https://deta.space/developers"
           />
-          <AddonInput id="slug" title="Short link" placeholder="nej3sm" />
-          {/* <div>
-            <label
-              htmlFor="url"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Destination URL
-            </label>
-            <div className="mt-1">
-              <input
-                type="text"
-                name="url"
-                id="url"
-                className="block w-full rounded-md border-gray-300 shadow-sm focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="https://deta.space/developers"
-              />
-            </div>
-          </div> */}
-
-          {/* <div>
-            <label
-              htmlFor="slug"
-              className="block text-sm font-medium text-gray-700"
-            >
-              Short link
-            </label>
-            <div className="relative mt-1 rounded-md shadow-sm">
-              <div className="pointer-events-none absolute inset-y-0 left-0 flex items-center pl-3">
-                <span className="text-gray-500">de.ta/</span>
-              </div>
-              <input
-                type="text"
-                name="slug"
-                id="slug"
-                className="block w-full rounded-md border-gray-300 pl-14 focus:border-indigo-500 focus:ring-indigo-500"
-                placeholder="dn4jem"
-                defaultValue={generateRandomSlug()}
-              />
-            </div>
-          </div> */}
+          <AddonInput
+            id="slug"
+            title="Short link"
+            placeholder="nej3sm"
+            value={generateRandomSlug()}
+          />
         </div>
 
         <div className="pt-5">
