@@ -23,7 +23,7 @@ async function getClicksNumber(id: string): Promise<string> {
   return `${clicks} clicks`;
 }
 
-export const loader = async () => {
+export async function loader() {
   const links = await getLinks();
 
   // Sort links by created_at
@@ -45,7 +45,7 @@ export const loader = async () => {
   return json({
     links: completeLinks,
   });
-};
+}
 
 export default function AppIndex() {
   const { links } = useLoaderData<typeof loader>();

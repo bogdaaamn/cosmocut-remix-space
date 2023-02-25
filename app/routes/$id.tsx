@@ -6,7 +6,7 @@ import type { LoaderArgs } from "@remix-run/node";
 import { getLinkData } from "~/models/link.server";
 import { createAnalytics } from "~/models/analytics.server";
 
-export const loader = async ({ params, request }: LoaderArgs) => {
+export async function loader({ params, request }: LoaderArgs) {
   if (!params.id) {
     throw new Error("Missing link ID");
   }
@@ -19,7 +19,7 @@ export const loader = async ({ params, request }: LoaderArgs) => {
   } catch (e) {
     return json({ id: params.id });
   }
-};
+}
 
 export default function RedirectSlug() {
   return (

@@ -9,7 +9,7 @@ import { ClipboardInput } from "~/components/Input";
 
 import type { LoaderArgs } from "@remix-run/node";
 
-export const loader = async ({ params }: LoaderArgs) => {
+export async function loader({ params }: LoaderArgs) {
   if (!params.id) {
     throw new Error("Missing link ID");
   }
@@ -17,7 +17,7 @@ export const loader = async ({ params }: LoaderArgs) => {
   const linkData = await getLinkData(params.id);
 
   return json({ link: linkData });
-};
+}
 
 export default function LinkSlug() {
   const { link } = useLoaderData<typeof loader>();
