@@ -5,6 +5,7 @@ import type { ActionArgs } from "@remix-run/node";
 
 import { createLink } from "~/models/link.server";
 import ShortUniqueId from "short-unique-id";
+import { AddonInput, Input } from "~/components/Input";
 
 export const action = async ({ request }: ActionArgs) => {
   const formData = await request.formData();
@@ -27,7 +28,13 @@ export default function LinkNew() {
     <main className="flex flex-col w-full h-full px-16 py-8 bg-white">
       <Form method="post">
         <div className="mt-6 grid grid-cols-2 gap-y-6 gap-x-4">
-          <div>
+          <Input
+            id="url"
+            title="Destination URL"
+            placeholder="https://deta.space/developers"
+          />
+          <AddonInput id="slug" title="Short link" placeholder="nej3sm" />
+          {/* <div>
             <label
               htmlFor="url"
               className="block text-sm font-medium text-gray-700"
@@ -43,8 +50,9 @@ export default function LinkNew() {
                 placeholder="https://deta.space/developers"
               />
             </div>
-          </div>
-          <div>
+          </div> */}
+
+          {/* <div>
             <label
               htmlFor="slug"
               className="block text-sm font-medium text-gray-700"
@@ -64,7 +72,7 @@ export default function LinkNew() {
                 defaultValue={generateRandomSlug()}
               />
             </div>
-          </div>
+          </div> */}
         </div>
 
         <div className="pt-5">
