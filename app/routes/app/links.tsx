@@ -13,9 +13,13 @@ function getRelativeTime(dateISOString: string): string {
   const now = new Date();
   const createdAt = new Date(dateISOString);
 
-  return formatDistance(createdAt, now, {
+  const relativeTime = formatDistance(createdAt, now, {
     addSuffix: true,
   });
+  return relativeTime
+    .replace("minute", "min")
+    .replace("about", "")
+    .replace("less than", "");
 }
 
 async function getClicksNumber(id: string): Promise<string> {
