@@ -52,7 +52,7 @@ export default function AppIndex() {
 
   return (
     <Layout>
-      <main className="grid grid-cols-3 gap-4 grow">
+      <main className="grid grid-cols-3 gap-4 grow h-full">
         <div className="overflow-scroll bg-white shadow rounded-xl">
           <ul className="divide-y divide-gray-200 last:border-b">
             {links.map((link) => (
