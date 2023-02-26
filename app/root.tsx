@@ -26,7 +26,7 @@ export default function App() {
         <Meta />
         <Links />
       </head>
-      <body className="h-screen bg-foreground">
+      <body className="h-screen bg-foreground overflow-hidden">
         <Outlet />
         <ScrollRestoration />
         <Scripts />
