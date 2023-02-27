@@ -15,7 +15,7 @@ export const links: LinksFunction = () => [{ rel: "stylesheet", href: styles }];
 
 export const meta: MetaFunction = () => ({
   charset: "utf-8",
-  title: "Remix in Space",
+  title: "CosmoCut – Send your short links into space",
   viewport: "width=device-width,initial-scale=1",
 });
 
