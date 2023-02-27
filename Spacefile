@@ -3,7 +3,7 @@ v: 0
 icon: ./icon.webp
 app_name: CosmoCut
 micros:
-    - name: remix-in-space
+    - name: cosmocut-remix
       src: .
       engine: nodejs16
       commands:
