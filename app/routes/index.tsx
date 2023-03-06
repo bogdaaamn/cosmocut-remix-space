@@ -32,8 +32,8 @@ export default function Index() {
         <nav className="flex items-center justify-between" aria-label="Global">
           <div className="flex">
             <Link to="/" className="-m-1.5 p-1.5">
-              <span className="sr-only">CosmoCut</span>
-              <img className="h-8" src="logo.svg" alt="CosmoCut Logo" />
+              <span className="sr-only">Cosmocut</span>
+              <img className="h-8" src="logo.svg" alt="Cosmocut Logo" />
             </Link>
           </div>
         </nav>

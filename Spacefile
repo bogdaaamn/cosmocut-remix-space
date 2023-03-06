@@ -1,7 +1,7 @@
 # Spacefile Docs: https://go.deta.dev/docs/spacefile/v0
 v: 0
 icon: ./icon.webp
-app_name: CosmoCut
+app_name: Cosmocut
 micros:
     - name: cosmocut-remix
       src: .
